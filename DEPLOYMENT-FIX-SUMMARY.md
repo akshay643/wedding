@@ -5,6 +5,7 @@ Your GitHub Actions workflow wasn't updating production because:
 1. ❌ The workflow was calling `./deploy.sh` but your script is named `deploy-production.sh`
 2. ❌ The deployment script wasn't pulling latest code from GitHub
 3. ❌ The script wasn't properly restarting the application after deployment
+4. ❌ PWA service worker was caching old build files causing 404 errors
 
 ## Changes Made
 
@@ -20,13 +21,24 @@ Your GitHub Actions workflow wasn't updating production because:
 Now the script:
 - ✅ **Pulls latest code** from GitHub (`git pull origin main`)
 - ✅ **Installs dependencies** (`npm install`)
+- ✅ **Clears PWA cache** (removes old service worker files)
 - ✅ **Applies nginx fixes** for large uploads (2GB limit)
 - ✅ **Builds the application** (`npm run build`)
 - ✅ **Restarts the app** (PM2 or manual restart)
 
+### 3. Fixed PWA Service Worker Issues (`next.config.js`)
+- ✅ **Excluded build manifests** from service worker precaching
+- ✅ **Added better caching strategies** for Next.js static files
+- ✅ **Added PWA update handler** to manage cache updates
+
 ### 3. Made Scripts Executable
 - ✅ `deploy-production.sh` is now executable
 - ✅ `fix-gcp-upload-limits.sh` is now executable
+
+### 4. Added PWA Update Management
+- ✅ **PWAUpdateHandler component** for automatic cache updates
+- ✅ **Service worker cleanup** on deployment
+- ✅ **Better error handling** for missing build files
 
 ## Ready to Deploy
 
@@ -56,6 +68,8 @@ After deployment, check:
 - ✅ Your website updates with latest changes
 - ✅ Large file uploads (up to 2GB) work
 - ✅ No more 413 errors for normal files
+- ✅ No more PWA service worker 404 errors
+- ✅ PWA update notifications work properly
 - ✅ Proper error messages for oversized files
 
 ## Next Steps

@@ -2,10 +2,28 @@ const withPWA = require('next-pwa')({
   dest: 'public',
   register: true,
   skipWaiting: true,
-  disable: process.env.NODE_ENV === 'development' ? false : false, // Always enabled for testing, change to true for dev-only
-  buildExcludes: [/middleware-manifest\.json$/],
+  disable: process.env.NODE_ENV === 'development' ? false : false,
+  // Force clear old caches
+  cleanupOutdatedCaches: true,
+  // Exclude problematic build files
+  buildExcludes: [
+    /middleware-manifest\.json$/, 
+    /_buildManifest\.js$/, 
+    /_ssgManifest\.js$/,
+    /\.map$/,
+    /^build-manifest\.json$/
+  ],
   publicExcludes: ['!robots.txt', '!sitemap.xml'],
-  // Production-optimized caching
+  // Fix for build manifest caching issues
+  fallbacks: {
+    image: '/offline.png',
+    document: '/offline.html',
+  },
+  // More aggressive caching strategy
+  mode: 'production',
+  // Add cache versioning
+  cacheId: `wedding-app-${Date.now()}`,
+  // Production-optimized caching with better error handling
   runtimeCaching: [
     {
       urlPattern: /^https?.*\.(png|jpg|jpeg|webp|svg|gif|ico)$/,
@@ -26,6 +44,18 @@ const withPWA = require('next-pwa')({
         expiration: {
           maxEntries: 50,
           maxAgeSeconds: 7 * 24 * 60 * 60, // 7 days
+        },
+      },
+    },
+    // Fix for Next.js build manifests
+    {
+      urlPattern: /\/_next\/static\/.*/,
+      handler: 'CacheFirst',
+      options: {
+        cacheName: 'next-static',
+        expiration: {
+          maxEntries: 60,
+          maxAgeSeconds: 24 * 60 * 60, // 24 hours
         },
       },
     },

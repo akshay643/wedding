@@ -22,9 +22,11 @@ echo "�📦 Building production-ready PWA..."
 echo ""
 
 # Clean previous builds
-echo "🧹 Cleaning previous builds..."
+echo "🧹 Cleaning previous builds and PWA cache..."
 rm -rf .next
 rm -rf out
+rm -rf public/sw.js
+rm -rf public/workbox-*.js
 
 # Install dependencies
 echo "📋 Installing dependencies..."

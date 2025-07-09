@@ -1,5 +1,7 @@
 import '../styles/globals.css'
 import Head from 'next/head'
+import PWAUpdateHandler from '../components/PWAUpdateHandler'
+import ServiceWorkerClearFix from '../components/ServiceWorkerClearFix'
 
 export default function App({ Component, pageProps }) {
   return (
@@ -35,6 +37,8 @@ export default function App({ Component, pageProps }) {
         {/* PWA Splash Screens for iOS */}
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </Head>
+      <ServiceWorkerClearFix />
+      <PWAUpdateHandler />
       <Component {...pageProps} />
     </>
   )

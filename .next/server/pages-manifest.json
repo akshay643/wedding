@@ -1,1 +1,6 @@
-{"/_app":"pages/_app.js","/admin":"pages/admin.html","/api/admin/login-background":"pages/api/admin/login-background.js","/api/admin/login":"pages/api/admin/login.js","/_error":"pages/_error.js","/api/create-folders":"pages/api/create-folders.js","/api/auth/logout":"pages/api/auth/logout.js","/api/fix-permissions":"pages/api/fix-permissions.js","/api/auth/login":"pages/api/auth/login.js","/api/auth/verify":"pages/api/auth/verify.js","/api/image":"pages/api/image.js","/api/gallery":"pages/api/gallery.js","/api/test-image":"pages/api/test-image.js","/api/wishes":"pages/api/wishes.js","/gallery-new":"pages/gallery-new.html","/gallery":"pages/gallery.html","/gallery-old":"pages/gallery-old.html","/login-new":"pages/login-new.html","/direct-image-test":"pages/direct-image-test.html","/login":"pages/login.html","/test-background":"pages/test-background.html","/wishes-test":"pages/wishes-test.html","/":"pages/index.html","/api/download":"pages/api/download.js","/api/upload-multiple":"pages/api/upload-multiple.js","/api/upload":"pages/api/upload.js","/_document":"pages/_document.js","/api/admin/upload-background":"pages/api/admin/upload-background.js","/404":"pages/404.html"}
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/login-new": "pages/login-new.js"
+}
