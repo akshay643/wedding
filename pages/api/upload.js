@@ -5,9 +5,10 @@ const { Readable } = require('stream');
 
 export const config = {
   api: {
-    bodyParser: false, // No body size limit
-    responseLimit: false, // No response size limit
-    // No file size cap
+    bodyParser: {
+      sizeLimit: '500mb', // Increase from default 1mb to 50mb
+    },
+    responseLimit: false,
   },
 };
 
@@ -127,3 +128,16 @@ export default async function handler(req, res) {
     });
   }
 }
+
+// In your upload component
+const handleFileSelect = (files) => {
+  const maxSize = 50 * 1024 * 1024; // 50MB
+  const oversizedFiles = files.filter(file => file.size > maxSize);
+  
+  if (oversizedFiles.length > 0) {
+    alert(`Files larger than 50MB detected. Please compress or resize: ${oversizedFiles.map(f => f.name).join(', ')}`);
+    return;
+  }
+  
+  // Continue with upload...
+};
