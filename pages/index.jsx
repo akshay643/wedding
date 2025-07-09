@@ -44,10 +44,10 @@ const PWATestingComponent = dynamic(
   () => import("../components/PWATestingComponent"),
   { ssr: false }
 );
-const ForceInstallPWA = dynamic(
-  () => import("../components/ForceInstallPWA"),
-  { ssr: false }
-);
+// const ForceInstallPWA = dynamic(
+//   () => import("../components/ForceInstallPWA"),
+//   { ssr: false }
+// );
 const NgrokPWAFix = dynamic(
   () => import("../components/NgrokPWAFix"),
   { ssr: false }
@@ -616,11 +616,11 @@ const WeddingPhotoApp = () => {
           content="Upload your wedding photos to our shared Google Drive collection"
         />
       </Head>
-      <PWAStatus />
-      <PWAInstallPrompt />
-      <PWATestingComponent />
-      <ForceInstallPWA />
-      <NgrokPWAFix />
+      {/* <PWAStatus /> */}
+      {/* <PWAInstallPrompt /> */}
+      {/* <PWATestingComponent /> */}
+      {/* <ForceInstallPWA /> */}
+      {/* <NgrokPWAFix /> */}
       {renderMainContent()}
       <UploadNotification />
       {showUploadStatus && (
