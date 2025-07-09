@@ -363,7 +363,7 @@ const LoginPage = () => {
           {/* Wedding Title */}
           <div className="text-center mb-8">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
-              Akshay & Tripti Wedding
+              Akshay 
             </h1>
             <p className="text-white/90 text-lg mb-6 drop-shadow-md">
               Please Share your photos & videos with us for this special day! ❤️
