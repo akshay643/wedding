@@ -345,7 +345,7 @@ const WeddingPhotoApp = () => {
 
         <div className="text-center pt-2">
           <h1 className="text-3xl font-bold text-gray-800 mb-2">
-            Capture the Magic
+            Capture the Magicss
           </h1>
           <p className="text-gray-600">Share your beautiful moments with us</p>
         </div>
