@@ -35,6 +35,21 @@ echo ""
 echo "✅ Build successful!"
 echo ""
 
+# Fix nginx configuration for large uploads (Google Cloud specific)
+echo "🔧 Applying Google Cloud nginx fixes for large uploads..."
+if [ -f "fix-gcp-upload-limits.sh" ]; then
+    sudo ./fix-gcp-upload-limits.sh
+    if [ $? -eq 0 ]; then
+        echo "✅ Nginx configuration updated for large uploads"
+    else
+        echo "⚠️  Warning: Could not update nginx configuration automatically"
+        echo "   Please run: sudo ./fix-gcp-upload-limits.sh manually"
+    fi
+else
+    echo "⚠️  Warning: fix-gcp-upload-limits.sh not found"
+fi
+echo ""
+
 # Test the production build locally
 echo "🧪 Testing production build locally..."
 echo "Starting server at http://localhost:3000"

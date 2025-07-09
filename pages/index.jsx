@@ -237,12 +237,23 @@ const WeddingPhotoApp = () => {
     setShowUploadStatus(true);
 
     try {
+      // Import compression utility
+      const { compressFiles } = await import('../utils/clientCompression');
+      
+      // Compress files before upload
+      setError("Preparing files for upload...");
+      const compressedPhotos = await compressFiles(photos, (progress, message) => {
+        setError(message);
+      });
+      
+      setError("Uploading to server...");
+      
       let response;
 
-      if (photos.length === 1) {
+      if (compressedPhotos.length === 1) {
         // Single photo upload
         const formData = new FormData();
-        formData.append("photo", photos[0]);
+        formData.append("photo", compressedPhotos[0]);
         formData.append("event", selectedEvent);
 
         response = await fetch("/api/upload", {
@@ -257,7 +268,7 @@ const WeddingPhotoApp = () => {
       } else {
         // Multiple photos upload
         const formData = new FormData();
-        photos.forEach((photo) => {
+        compressedPhotos.forEach((photo) => {
           formData.append("photos", photo);
         });
         formData.append("event", selectedEvent);

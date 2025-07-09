@@ -20,4 +20,8 @@ jobs:
       - name: 🚀 Deploy to GCP VM
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} \
-            "cd ${{ secrets.APP_DIR }} && ./deploy.sh"
+            "cd ${{ secrets.APP_DIR }} && git pull origin main && \
+             npm install && \
+             sudo ./fix-gcp-upload-limits.sh && \
+             npm run build && \
+             pm2 restart all || pm2 start ecosystem.config.js"
