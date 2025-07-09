@@ -12,7 +12,6 @@
     "pwa:analyze": "npx pwa-asset-generator --help"
   },
   "dependencies": {
-    "browser-image-compression": "^2.0.2",
     "cookie": "^1.0.2",
     "googleapis": "^128.0.0",
     "jsonwebtoken": "^9.0.2",

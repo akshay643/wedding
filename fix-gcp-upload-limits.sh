@@ -38,16 +38,16 @@ http {
     keepalive_timeout 65;
     types_hash_max_size 2048;
     
-    # CRITICAL: Increase client_max_body_size globally (2GB limit)
-    client_max_body_size 2048M;
+    # CRITICAL: Increase client_max_body_size globally
+    client_max_body_size 100M;
     client_body_buffer_size 1M;
     client_header_buffer_size 8k;
     large_client_header_buffers 8 32k;
     
     # Increase timeouts for large uploads
-    client_body_timeout 300s;
-    client_header_timeout 300s;
-    send_timeout 300s;
+    client_body_timeout 60s;
+    client_header_timeout 60s;
+    send_timeout 60s;
     
     include /etc/nginx/mime.types;
     default_type application/octet-stream;

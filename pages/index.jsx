@@ -237,23 +237,12 @@ const WeddingPhotoApp = () => {
     setShowUploadStatus(true);
 
     try {
-      // Import compression utility
-      const { compressFiles } = await import('../utils/clientCompression');
-      
-      // Compress files before upload
-      setError("Preparing files for upload...");
-      const compressedPhotos = await compressFiles(photos, (progress, message) => {
-        setError(message);
-      });
-      
-      setError("Uploading to server...");
-      
       let response;
 
-      if (compressedPhotos.length === 1) {
+      if (photos.length === 1) {
         // Single photo upload
         const formData = new FormData();
-        formData.append("photo", compressedPhotos[0]);
+        formData.append("photo", photos[0]);
         formData.append("event", selectedEvent);
 
         response = await fetch("/api/upload", {
@@ -262,13 +251,11 @@ const WeddingPhotoApp = () => {
           headers: {
             Accept: "application/json",
           },
-          // Add timeout for large files (5 minutes)
-          signal: AbortSignal.timeout(300000),
         });
       } else {
         // Multiple photos upload
         const formData = new FormData();
-        compressedPhotos.forEach((photo) => {
+        photos.forEach((photo) => {
           formData.append("photos", photo);
         });
         formData.append("event", selectedEvent);
@@ -279,8 +266,6 @@ const WeddingPhotoApp = () => {
           headers: {
             Accept: "application/json",
           },
-          // Add timeout for large files (5 minutes)
-          signal: AbortSignal.timeout(300000),
         });
       }
 
@@ -291,31 +276,9 @@ const WeddingPhotoApp = () => {
           console.log("Upload completed successfully!");
         } else {
           console.error("Some memories failed to upload");
-          setError("Some files failed to upload. Please try again.");
         }
       } else {
-        // Handle HTTP error responses
-        let errorMessage = "Upload failed";
-        
-        if (response.status === 413) {
-          errorMessage = "File too large for server. Please compress your files or try smaller files.";
-        } else if (response.status === 504 || response.status === 524) {
-          errorMessage = "Upload timeout. The file might be too large or connection too slow.";
-        } else if (response.status >= 500) {
-          errorMessage = "Server error. Please try again later.";
-        } else if (response.status === 401) {
-          errorMessage = "Authentication error. Please log in again.";
-        } else {
-          try {
-            const errorData = await response.json();
-            errorMessage = errorData.error || `Upload failed (${response.status})`;
-          } catch {
-            errorMessage = `Upload failed with status ${response.status}`;
-          }
-        }
-        
-        console.error("Upload failed:", errorMessage);
-        setError(errorMessage);
+        console.error("Upload failed");
       }
     } catch (error) {
       console.error("Upload error:", error);
