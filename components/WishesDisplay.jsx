@@ -17,10 +17,10 @@ const WishesDisplay = ({ refreshTrigger }) => {
         setWishes(data.wishes || []);
         setError(null);
       } else {
-        setError('Failed to load wishes');
+        setError('Failed to load the wishes');
       }
     } catch (err) {
-      console.error('Error fetching wishes:', err);
+      console.error('Error in fetching wishes:', err);
       setError('Failed to load wishes');
     } finally {
       setLoading(false);
