@@ -231,7 +231,7 @@ const LoginPage = () => {
   return (
     <>
       <Head>
-        <title>Welcome - Akshay & Tripti Wedding</title>
+        <title>Welcome - Akshay & Tripti Weddingssss</title>
         <meta
           name="description"
           content="Join us in celebrating our special day"
@@ -380,7 +380,7 @@ const LoginPage = () => {
                     htmlFor="name"
                     className="block text-sm font-medium text-gray-700 mb-2"
                   >
-                    Welcome to our wedding celebration come and get us! Please share your name
+                    Welcome  here to our wedding celebration come and get us! Please share your name
                     with us
                   </label>
                   <input
