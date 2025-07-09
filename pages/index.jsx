@@ -251,6 +251,8 @@ const WeddingPhotoApp = () => {
           headers: {
             Accept: "application/json",
           },
+          // Add timeout for large files (5 minutes)
+          signal: AbortSignal.timeout(300000),
         });
       } else {
         // Multiple photos upload
@@ -266,6 +268,8 @@ const WeddingPhotoApp = () => {
           headers: {
             Accept: "application/json",
           },
+          // Add timeout for large files (5 minutes)
+          signal: AbortSignal.timeout(300000),
         });
       }
 
@@ -276,9 +280,31 @@ const WeddingPhotoApp = () => {
           console.log("Upload completed successfully!");
         } else {
           console.error("Some memories failed to upload");
+          setError("Some files failed to upload. Please try again.");
         }
       } else {
-        console.error("Upload failed");
+        // Handle HTTP error responses
+        let errorMessage = "Upload failed";
+        
+        if (response.status === 413) {
+          errorMessage = "File too large for server. Please compress your files or try smaller files.";
+        } else if (response.status === 504 || response.status === 524) {
+          errorMessage = "Upload timeout. The file might be too large or connection too slow.";
+        } else if (response.status >= 500) {
+          errorMessage = "Server error. Please try again later.";
+        } else if (response.status === 401) {
+          errorMessage = "Authentication error. Please log in again.";
+        } else {
+          try {
+            const errorData = await response.json();
+            errorMessage = errorData.error || `Upload failed (${response.status})`;
+          } catch {
+            errorMessage = `Upload failed with status ${response.status}`;
+          }
+        }
+        
+        console.error("Upload failed:", errorMessage);
+        setError(errorMessage);
       }
     } catch (error) {
       console.error("Upload error:", error);

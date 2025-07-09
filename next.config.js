@@ -61,6 +61,8 @@ const nextConfig = {
   swcMinify: true,
   experimental: {
     largePageDataBytes: 128 * 1024, // 128KB
+    // Disable ISR memory cache to free up memory for uploads
+    isrMemoryCacheSize: 0,
   },
   // Headers for PWA and ngrok compatibility
   async headers() {

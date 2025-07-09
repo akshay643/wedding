@@ -4,6 +4,14 @@
   "outputDirectory": ".next",
   "installCommand": "npm install",
   "devCommand": "npm run dev",
+  "functions": {
+    "pages/api/upload.js": {
+      "maxDuration": 300
+    },
+    "pages/api/upload-multiple.js": {
+      "maxDuration": 300
+    }
+  },
   "headers": [
     {
       "source": "/sw.js",
