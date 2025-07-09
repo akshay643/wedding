@@ -5,8 +5,9 @@ const { Readable } = require('stream');
 
 export const config = {
   api: {
-    bodyParser: false,
-    responseLimit: false,
+    bodyParser: false, // No body size limit
+    responseLimit: false, // No response size limit
+    // No file size cap
   },
 };
 

@@ -2,9 +2,7 @@ const multer = require('multer');
 
 const upload = multer({
   storage: multer.memoryStorage(),
-  limits: {
-    fileSize: 2 * 1024 * 1024 * 1024, // 2GB limit for videos
-  },
+  // Removed fileSize limit to allow unlimited upload size
   fileFilter: (req, file, cb) => {
     // Allow images and videos
     if (file.mimetype.startsWith('image/') || file.mimetype.startsWith('video/')) {
