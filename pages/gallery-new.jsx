@@ -8,7 +8,7 @@ import {
   Check,
 } from "lucide-react";
 import withAuth from '../components/withAuth';
-
+//test
 const eventOptions = [
   { id: "all", name: "All Events" },
   { id: "mehndi", name: "Mehndi" },
