@@ -20,4 +20,4 @@ jobs:
       - name: 🚀 Deploy to GCP VM
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} \
-            "cd ${{ secrets.APP_DIR }} && ./deploy.sh"
+            "cd ${{ secrets.APP_DIR }} && ./deploy-production.sh"
